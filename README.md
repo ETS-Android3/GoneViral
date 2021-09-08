@@ -1,1 +1,1 @@
-# ViralCards
+# GoneViral

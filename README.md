@@ -1,8 +1,10 @@
 # Gone Viral
-WIP
+## a.k.a WHO started this freaking virus?!
 
 ## Project Description
-WIP
+Gone Viral or WHO started this freaking virus?! is a deckbuilder card game designed by my wife and I. Last year when everyone went into quarantine, my wife and I happened to get stuck at her parents' house in Canada and couldn't cross the border back to the U.S. We are board and card game enthusiasts and decided to use a lot of our free time to design a card game themed around the various situations we found ourselves, and others, in. Although the game can be categorized as a deckbuilder, each player has their own "role" that gives them a unique objective towards winning the game.
+
+We began playtesting by printing off each card on cardstock but quickly found that making edits to cards/reprints made it extremely time consuming and costly and as I have some experience with mobile app design we decided it best to make the card game into an app first, before eventually moving onto print versions. This project will focus on creating a minimalistic application capable of playing the game with a preset number of players.
 
 ## Team
 I'm looking for 2 or 3 others to join the implementation team.

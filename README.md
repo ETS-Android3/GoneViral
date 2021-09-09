@@ -1,5 +1,5 @@
 # Gone Viral
-## a.k.a WHO started this freaking virus?!
+a.k.a **WHO started this freaking virus?!**
 
 ## Project Description
 Gone Viral or WHO started this freaking virus?! is a deckbuilder card game designed by my wife and I. Last year when everyone went into quarantine, my wife and I happened to get stuck at her parents' house in Canada and couldn't cross the border back to the U.S. We are board and card game enthusiasts and decided to use a lot of our free time to design a card game themed around the various situations we found ourselves, and others, in. Although the game can be categorized as a deckbuilder, each player has their own "role" that gives them a unique objective towards winning the game.

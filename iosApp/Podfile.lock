@@ -1,29 +1,16 @@
 PODS:
-  - CocoaLumberjack (3.7.2):
-    - CocoaLumberjack/Core (= 3.7.2)
-  - CocoaLumberjack/Core (3.7.2)
   - shared (1.0)
-  - SVGKit (3.0.0):
-    - CocoaLumberjack (~> 3.0)
 
 DEPENDENCIES:
   - shared (from `../shared`)
-  - SVGKit
-
-SPEC REPOS:
-  trunk:
-    - CocoaLumberjack
-    - SVGKit
 
 EXTERNAL SOURCES:
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
   shared: e480c2b5c80ad86236d114ab3f4459f8acb1d36a
-  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
 
-PODFILE CHECKSUM: 56a0a85dacb5b2f1f96d65630bf9cf31df9b8ef4
+PODFILE CHECKSUM: 334d1d0bd93f067a1f36075c3dd77511e97da8ae
 
 COCOAPODS: 1.11.2

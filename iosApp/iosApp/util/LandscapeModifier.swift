@@ -3,7 +3,7 @@
 //  Gone Viral
 //
 //  Created by William Edson Kilgore IV on 9/20/21.
-//  Copyright © 2021 orgName. All rights reserved.
+//  Copyright © 2021 Black Opal Solutions. All rights reserved.
 //
 //  https://sarunw.com/posts/how-to-preview-a-device-in-landscape-orientation-with-swiftui-previews/
 

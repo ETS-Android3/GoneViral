@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		6B5E263526F98E0A00B112EF /* VectorImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5E263426F98E0A00B112EF /* VectorImageView.swift */; };
+		6B5E263726F98F6800B112EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B5E263626F98F6800B112EF /* Assets.xcassets */; };
+		6B5E263A26F9924200B112EF /* LandscapeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5E263926F9924200B112EF /* LandscapeModifier.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		A0357B57FF0C6BD7CD28EE73 /* Pods_Gone_Viral.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB93289A39E7C6EBB0B2C433 /* Pods_Gone_Viral.framework */; };
 /* End PBXBuildFile section */
@@ -16,6 +19,9 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		2F74488DEA510D6EF981AD74 /* Pods-Gone Viral.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gone Viral.debug.xcconfig"; path = "Target Support Files/Pods-Gone Viral/Pods-Gone Viral.debug.xcconfig"; sourceTree = "<group>"; };
 		4E7A9FBEF3B4CE49531BF9FC /* Pods-Gone Viral.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gone Viral.release.xcconfig"; path = "Target Support Files/Pods-Gone Viral/Pods-Gone Viral.release.xcconfig"; sourceTree = "<group>"; };
+		6B5E263426F98E0A00B112EF /* VectorImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorImageView.swift; sourceTree = "<group>"; };
+		6B5E263626F98F6800B112EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B5E263926F9924200B112EF /* LandscapeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeModifier.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* Gone Viral.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gone Viral.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,6 +49,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6B5E263326F98DF600B112EF /* util */ = {
+			isa = PBXGroup;
+			children = (
+				6B5E263426F98E0A00B112EF /* VectorImageView.swift */,
+				6B5E263926F9924200B112EF /* LandscapeModifier.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		6B5E263826F98FD400B112EF /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7555FF82242A565900829871 /* ContentView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -64,9 +87,11 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				7555FF82242A565900829871 /* ContentView.swift */,
+				6B5E263326F98DF600B112EF /* util */,
+				6B5E263826F98FD400B112EF /* view */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
+				6B5E263626F98F6800B112EF /* Assets.xcassets */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -90,6 +115,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				43120DFC73BA0113DB639A68 /* Frameworks */,
+				9EFA59F14ABD81ADFCE5C06C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -138,6 +164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B5E263726F98F6800B112EF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +193,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9EFA59F14ABD81ADFCE5C06C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gone Viral/Pods-Gone Viral-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gone Viral/Pods-Gone Viral-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gone Viral/Pods-Gone Viral-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -173,7 +217,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B5E263A26F9924200B112EF /* LandscapeModifier.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				6B5E263526F98E0A00B112EF /* VectorImageView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

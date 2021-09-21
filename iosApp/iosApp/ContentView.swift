@@ -1,8 +1,15 @@
 import SwiftUI
+import SpriteKit
 import shared
 
 struct ContentView: View {
     @State private var showingGame = false
+    
+    func sizedScene(size: CGSize) -> SKScene {
+        let scene = GameScene(size: size)
+        scene.scaleMode = .fill
+        return scene
+    }
 
 	var body: some View {
         Group {
@@ -14,7 +21,10 @@ struct ContentView: View {
                         .font(.system(size: 45, weight: .bold, design: .default))
                 }
             } else {
-                EmptyView()
+                GeometryReader { geometry in
+                    SpriteView(scene: sizedScene(size: geometry.size))
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                }.edgesIgnoringSafeArea(.all)
             }
         }
 	}

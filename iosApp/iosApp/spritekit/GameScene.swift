@@ -23,12 +23,12 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         let chinaCon = CardSprite(back: "Base Back", front: "China Con")
         chinaCon.position = CGPoint(x: 100, y: 200)
-        chinaCon.changeSize(to: size.width / 10)
+        chinaCon.changeWidth(to: size.width / 10)
         addChild(chinaCon)
         
         let covidiot = CardSprite(back: "Role Back", front: "Covidiot Role")
         covidiot.position = CGPoint(x: 300, y: 200)
-        covidiot.changeSize(to: size.width / 10)
+        covidiot.changeWidth(to: size.width / 10)
         addChild(covidiot)
     }
     
@@ -37,6 +37,8 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let card = atPoint(location) as? CardSprite {
+                if card.enlarged { return }
+                
                 // drag card to location user touched
                 card.position = location
             }
@@ -48,10 +50,15 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let card = atPoint(location) as? CardSprite {
-                // increase z-position of card from board to moving
+                if touch.tapCount > 1 {
+                    card.enlarge(screenSize: size)
+                    return
+                }
+                if card.enlarged { return }
+                
                 card.zPosition = CardLevel.moving.rawValue
                 
-                // increase scale to visualize size
+                // animate movement
                 card.removeAction(forKey: "drop")
                 card.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
             }
@@ -63,10 +70,11 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let card = atPoint(location) as? CardSprite {
-                // decrease z-position of card from moving to board
+                if card.enlarged { return }
+                
                 card.zPosition = CardLevel.board.rawValue
                 
-                // decrease scale to visualize size
+                // animate movement
                 card.removeAction(forKey: "pickup")
                 card.run(SKAction.scale(to: 1, duration: 0.25), withKey: "drop")
                 

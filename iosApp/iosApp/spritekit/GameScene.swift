@@ -21,15 +21,11 @@ class GameScene: SKScene {
     
     /// Initialize scene when it appears
     override func didMove(to view: SKView) {
-        let chinaCon = CardSprite(back: "Base Back", front: "China Con")
-        chinaCon.position = CGPoint(x: 100, y: 200)
-        chinaCon.changeWidth(to: size.width / 10)
-        addChild(chinaCon)
-        
-        let covidiot = CardSprite(back: "Role Back", front: "Covidiot Role")
-        covidiot.position = CGPoint(x: 300, y: 200)
-        covidiot.changeWidth(to: size.width / 10)
-        addChild(covidiot)
+        let hand = HandView(with: self, x: 100, y: 200, cardWidth: size.width / 10)
+        hand.addCard(backTexture: "Base Back", frontTexture: "China Con")
+        hand.addCard(backTexture: "Base Back", frontTexture: "Donut Shop")
+        hand.addCard(backTexture: "Base Back", frontTexture: "Manufactured")
+        hand.addCard(backTexture: "Role Back", frontTexture: "Covidiot Role")
     }
     
     /// Perform actions when touch is moved across screen

@@ -33,11 +33,11 @@ class HandView {
     /// Create the hand on a given scene, maybe giving it initial cards
     /// - Parameters:
     ///   - scene: the scene to add the hand to
-    ///   - x: the x position for the center of the initial card
-    ///   - y: the y position for the top of the initial card
+    ///   - x: the x position for the center of the hand
+    ///   - y: the y position for the bottom of the hand
     ///   - width: the width of each card
     ///   - cards: the textures for each of the initial cards, if any
-    init(with scene: SKScene, x: CGFloat, y: CGFloat, cardWidth width: CGFloat, cards: (backTexture: String, frontTexture: String)...) {
+    init(with scene: SKScene, x: CGFloat = 0, y: CGFloat = 0, cardWidth width: CGFloat, cards: (backTexture: String, frontTexture: String)...) {
         self.scene = scene
         self.x = x
         self.y = y
@@ -55,48 +55,58 @@ class HandView {
     func addCard(backTexture: String, frontTexture: String) {
         let sprite = CardSprite(back: backTexture, front: frontTexture)
         sprite.changeWidth(to: cardWidth)
+        sprite.zPosition = CardLevel.board.rawValue
         scene?.addChild(sprite)
         cards.append(sprite)
         repositionCards()
     }
     
-    /// Reposition the cards according to placement in hand
-    private func repositionCards() {
-        let oddCount = countOdd(from: 0, to: cards.count - 1)
-        var rotation = cardAngle * Float(oddCount)
-        var xpos = x
-        var ypos = y
-        
-        for card in cards {
-            card.removeAllActions() // prevent rotate action from occurring again
-            card.position = CGPoint(x: xpos, y: ypos)
-            let rads = CGFloat(GLKMathDegreesToRadians(rotation))
-            
-            let rotateAction = SKAction.rotate(byAngle: rads, duration: 0)
-            card.run(rotateAction)
-            
-            rotation -= cardAngle
-            xpos += cardPaddingX
-            ypos -= cardPaddingY
-        }
-    }
-    
-    #warning("removeCard(at:) needs to be fixed")
     /// Remove the given card from the hand
     /// - Parameters:
     ///   - index: the index of the card to remove
     func removeCard(at index: Int) {
         cards[index].removeFromParent()
         cards.remove(at: index)
+        repositionCards()
+    }
+    
+    /// Move the hand and all cards in it to a specific point
+    /// - Parameters:
+    ///   - point: the point to move the hand to, the x is the center of the hand, the y is the bottom of the hand
+    func moveHand(to point: CGPoint) {
+        x = point.x
+        y = point.y
+        repositionCards()
+    }
+    
+    /// Readd the cards so they appear in proper order
+    func readdCards() {
+        for card in cards {
+            card.removeFromParent()
+            scene?.addChild(card)
+        }
+    }
+    
+    /// Reposition the cards according to placement in hand
+    private func repositionCards() {
+        let oddCount = countOdd(from: 0, to: cards.count - 1)
+        var rotation = cardAngle * Float(oddCount)
+        var xpos = x - CGFloat(oddCount) * cardPaddingX
+        var ypos = y
         
-        var dx = x
-        for i in 0 ..< index {
-            dx += cards[i].size.width + 5 // 5 padding
+        // the y needs to be offset by half the height of the card to
+        // make the hand's y value seem to be at the bottom of the cards
+        if cards.count > 0 {
+            ypos += cards[0].size.height / 2
         }
         
-        for i in index ..< cards.count {
-            cards[i].position = CGPoint(x: dx, y: y)
-            dx += cards[i].size.width + 5 // 5 padding
+        for card in cards {
+            card.position = CGPoint(x: xpos, y: ypos)
+            card.zRotation = CGFloat(GLKMathDegreesToRadians(rotation))
+            
+            rotation -= cardAngle
+            xpos += cardPaddingX
+            ypos -= cardPaddingY
         }
     }
     

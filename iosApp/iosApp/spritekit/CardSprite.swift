@@ -17,6 +17,7 @@ class CardSprite: SKSpriteNode {
     var enlarged = false
     var savedPosition = CGPoint.zero
     var savedSize = CGSize.zero
+    var savedRotation = CGFloat.zero
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -67,24 +68,25 @@ class CardSprite: SKSpriteNode {
     /// - Parameters:
     ///   - screenSize: the size of the screen
     func enlarge(screenSize: CGSize) {
+        removeAllActions()
+        
         if enlarged {
             enlarged = false
             zPosition = CardLevel.board.rawValue
             position = savedPosition
             size = savedSize
-            removeAllActions()
-            zRotation = 0
+            zRotation = savedRotation
         } else {
             enlarged = true
+            zPosition = CardLevel.enlarged.rawValue
             savedPosition = position
             savedSize = size
-            zPosition = CardLevel.enlarged.rawValue
+            savedRotation = zRotation
             
             if let parent = parent {
                 position = CGPoint(x: parent.frame.midX, y: parent.frame.midY)
             }
             
-            removeAllActions()
             changeHeight(to: screenSize.height - 20)
             zRotation = 0
         }

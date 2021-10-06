@@ -127,4 +127,79 @@ public class CardDaoTest {
             verify(statement, times(1)).setString(9, card.getFrontTexture());
         }
     }
+
+    @Nested
+    @DisplayName("Remove Tests")
+    public class RemoveTests {
+        @Test
+        @DisplayName("Should remove card from database")
+        public void should_RemoveCardFromDatabase() throws SQLException, DatabaseAccessException {
+            // setup mock
+            Connection connection = mock(Connection.class);
+            PreparedStatement statement = mock(PreparedStatement.class);
+            doReturn(connection).when(dao).getConnection(anyString(), anyString(), anyString());
+            doReturn(statement).when(connection).prepareStatement(anyString());
+
+            // test
+            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
+            assertDoesNotThrow(() -> dao.removeCard(card));
+
+            // expected
+            verify(dao, times(1)).removeCard(card);
+            verify(connection, times(1)).prepareStatement(anyString());
+            verify(connection, times(1)).setAutoCommit(false);
+            verify(connection, times(1)).commit();
+            verify(connection, times(0)).rollback();
+            verify(statement, times(1)).setString(1, "1");
+            verify(statement, times(1)).executeQuery();
+        }
+
+        @Test
+        @DisplayName("Should do nothing when card is null")
+        public void should_DoNothing_when_CardIsNull() throws SQLException, DatabaseAccessException {
+            // test
+            assertDoesNotThrow(() -> dao.removeCard(null));
+
+            // expected
+            verify(dao, times(1)).removeCard(null);
+            verify(dao, times(0)).getConnection(anyString(), anyString(), anyString());
+        }
+
+        @Test
+        @DisplayName("Should throw exception when card is not null and connection throws exception")
+        public void should_ThrowException_when_CardNonnullAndConnectionThrowsException()
+                throws SQLException, DatabaseAccessException {
+            // setup mock
+            doThrow(SQLException.class).when(dao).getConnection(anyString(), anyString(), anyString());
+
+            // test
+            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
+            assertThrows(DatabaseAccessException.class, () -> dao.removeCard(card));
+
+            // expected
+            verify(dao, times(1)).removeCard(card);
+            verify(dao, times(1)).getConnection(anyString(), anyString(), anyString());
+        }
+
+        @Test
+        @DisplayName("Should throw exception when card is not null and connection throws exception")
+        public void should_ThrowException_when_CardNonnullAndStatementThrowsException()
+                throws SQLException, DatabaseAccessException {
+            // setup mock
+            Connection connection = mock(Connection.class);
+            doReturn(connection).when(dao).getConnection(anyString(), anyString(), anyString());
+            doThrow(SQLException.class).when(connection).prepareStatement(anyString());
+
+            // test
+            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
+            assertThrows(DatabaseAccessException.class, () -> dao.removeCard(card));
+
+            // expected
+            verify(dao, times(1)).removeCard(card);
+            verify(dao, times(1)).getConnection(anyString(), anyString(), anyString());
+            verify(connection, times(1)).prepareStatement(anyString());
+            verify(connection, times(0)).setAutoCommit(false);
+            verify(connection, times(1)).rollback();
+        }
+    }
 }

@@ -16,7 +16,7 @@ public class GoalDao extends Dao {
    * @throws DatabaseAccessException if there was an error accessing the database.
    */
   public void insertGoals(Goal... goals) throws DatabaseAccessException {
-    if (goals.length == 0) {
+    if (goals == null || goals.length == 0) {
       log.warn("Attempted to insert 0 goals");
       return;
     }

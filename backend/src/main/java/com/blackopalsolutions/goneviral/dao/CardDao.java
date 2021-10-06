@@ -18,7 +18,7 @@ public class CardDao extends Dao {
      * @throws DatabaseAccessException if there was an error accessing the database.
      */
     public void insertCards(Card... cards) throws DatabaseAccessException {
-        if (cards.length == 0) {
+        if (cards == null || cards.length == 0) {
             log.warn("Attempted to insert 0 cards.");
             return;
         }

@@ -17,12 +17,13 @@ public class GoalDao extends Dao {
    */
   public void insertGoals(Goal... goals) throws DatabaseAccessException {
     if (goals.length == 0) {
+      log.warn("Attempted to insert 0 goals");
       return;
     }
 
-    try (Connection con = getConnection(getDatabaseUrl(), getUser(), getPassword())) {
-      String query = "INSERT INTO goals(goalId, roleId, condition) VALUES(?, ?, ?)";
-      try (PreparedStatement st = con.prepareStatement(query)) {
+    try (Connection con = getConnection()) {
+      String sql = "INSERT INTO goals(goalId, roleId, condition) VALUES(?, ?, ?)";
+      try (PreparedStatement st = con.prepareStatement(sql)) {
         // begin transaction
         con.setAutoCommit(false);
 
@@ -65,7 +66,7 @@ public class GoalDao extends Dao {
       return;
     }
 
-    try (Connection con = getConnection(getDatabaseUrl(), getUser(), getPassword())) {
+    try (Connection con = getConnection()) {
       String query = "DELETE FROM goals WHERE goalId = ?";
       try (PreparedStatement st = con.prepareStatement(query)) {
         con.setAutoCommit(false);

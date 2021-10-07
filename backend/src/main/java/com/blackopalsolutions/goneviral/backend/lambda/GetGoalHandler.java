@@ -2,11 +2,11 @@ package com.blackopalsolutions.goneviral.backend.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.blackopalsolutions.goneviral.backend.model.request.GetGoalRequest;
+import com.blackopalsolutions.goneviral.backend.model.request.IdRequest;
 import com.blackopalsolutions.goneviral.backend.model.response.GetGoalResponse;
 import com.blackopalsolutions.goneviral.backend.service.GoalService;
 
-public class GetGoalHandler implements RequestHandler<GetGoalRequest, GetGoalResponse> {
+public class GetGoalHandler implements RequestHandler<IdRequest, GetGoalResponse> {
 
     /**
      * Handles a getGoal request.
@@ -15,7 +15,7 @@ public class GetGoalHandler implements RequestHandler<GetGoalRequest, GetGoalRes
      * @return the goal retrieved, or a failure message.
      */
     @Override
-    public GetGoalResponse handleRequest(GetGoalRequest request, Context context) {
+    public GetGoalResponse handleRequest(IdRequest request, Context context) {
         return (new GoalService()).getGoal(request);
     }
 }

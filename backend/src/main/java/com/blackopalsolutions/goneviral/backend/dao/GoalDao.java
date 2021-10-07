@@ -18,7 +18,7 @@ public class GoalDao extends Dao {
     }
 
     try (Connection con = getConnection()) {
-      String sql = "INSERT INTO goals(goalId, roleId, condition) VALUES(?, ?, ?)";
+      String sql = "INSERT INTO goals(id, roleId, condition) VALUES(?, ?, ?)";
       try (PreparedStatement st = con.prepareStatement(sql)) {
         // begin transaction
         con.setAutoCommit(false);
@@ -57,7 +57,7 @@ public class GoalDao extends Dao {
     Goal goal = null;
 
     try (Connection con = getConnection()) {
-      String sql = "SELECT * FROM goals WHERE goalId = ?";
+      String sql = "SELECT * FROM goals WHERE id = ?";
       try (PreparedStatement st = con.prepareStatement(sql)) {
         // begin transaction
         con.setAutoCommit(false);
@@ -66,9 +66,9 @@ public class GoalDao extends Dao {
         st.setString(1, id);
         ResultSet rs = st.executeQuery();
         if (rs.next()) {
-          String goalId = rs.getString(1);
-          String roleId = rs.getString(2);
-          String condition = rs.getString(3);
+          String goalId = rs.getString("id");
+          String roleId = rs.getString("roleId");
+          String condition = rs.getString("condition");
           goal = new Goal(goalId, roleId, condition);
         }
 
@@ -99,7 +99,7 @@ public class GoalDao extends Dao {
     }
 
     try (Connection con = getConnection()) {
-      String sql = "UPDATE goals SET roleId = ?, condition = ? WHERE goalId = ?";
+      String sql = "UPDATE goals SET roleId = ?, condition = ? WHERE id = ?";
       try (PreparedStatement st = con.prepareStatement(sql)) {
         // begin transaction
         con.setAutoCommit(false);
@@ -132,7 +132,7 @@ public class GoalDao extends Dao {
    */
   public void removeGoal(String id) throws DatabaseAccessException {
     try (Connection con = getConnection()) {
-      String query = "DELETE FROM goals WHERE goalId = ?";
+      String query = "DELETE FROM goals WHERE id = ?";
       try (PreparedStatement st = con.prepareStatement(query)) {
         con.setAutoCommit(false);
         st.setString(1, id);

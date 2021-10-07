@@ -19,7 +19,7 @@ public class CardDao extends Dao {
         }
 
         try (Connection con = getConnection()) {
-            String query = "INSERT INTO cards(cardId, type, cost, description,"
+            String query = "INSERT INTO cards(id, type, cost, description,"
                     + " effect, title, value, backTexture, frontTexture)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement st = con.prepareStatement(query)) {
@@ -66,7 +66,7 @@ public class CardDao extends Dao {
         Card card = null;
 
         try (Connection con = getConnection()) {
-            String sql = "SELECT * FROM cards WHERE cardId = ?";
+            String sql = "SELECT * FROM cards WHERE id = ?";
             try (PreparedStatement st = con.prepareStatement(sql)) {
                 // begin transaction
                 con.setAutoCommit(false);
@@ -75,15 +75,15 @@ public class CardDao extends Dao {
                 st.setString(1, id);
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
-                    String cardId = rs.getString(1);
-                    String type = rs.getString(2);
-                    int cost = rs.getInt(3);
-                    String description = rs.getString(4);
-                    String effect = rs.getString(5);
-                    String title = rs.getString(6);
-                    int value = rs.getInt(7);
-                    String back = rs.getString(8);
-                    String front = rs.getString(9);
+                    String cardId = rs.getString("id");
+                    String type = rs.getString("type");
+                    int cost = rs.getInt("cost");
+                    String description = rs.getString("description");
+                    String effect = rs.getString("effect");
+                    String title = rs.getString("title");
+                    int value = rs.getInt("value");
+                    String back = rs.getString("backTexture");
+                    String front = rs.getString("frontTexture");
                     card = new Card(cardId, type, cost, description, effect, title, value, back, front);
                 }
 
@@ -117,7 +117,7 @@ public class CardDao extends Dao {
         try (Connection con = getConnection()) {
             String sql = "UPDATE cards SET type = ?, cost = ?, description = ?,"
                     + " effect = ?, title = ?, value = ?, backTexture = ?, frontTexture = ?"
-                    + " WHERE cardId = ?";
+                    + " WHERE id = ?";
             try (PreparedStatement st = con.prepareStatement(sql)) {
                 // begin transaction
                 con.setAutoCommit(false);
@@ -156,7 +156,7 @@ public class CardDao extends Dao {
      */
     public void removeCard(String id) throws DatabaseAccessException {
         try (Connection con = getConnection()) {
-            String sql = "DELETE FROM cards WHERE cardId = ?";
+            String sql = "DELETE FROM cards WHERE id = ?";
             try (PreparedStatement st = con.prepareStatement(sql)) {
                 con.setAutoCommit(false);
                 st.setString(1, id);

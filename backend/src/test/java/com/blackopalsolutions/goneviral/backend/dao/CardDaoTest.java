@@ -141,11 +141,10 @@ public class CardDaoTest {
             doReturn(statement).when(connection).prepareStatement(anyString());
 
             // test
-            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
-            assertDoesNotThrow(() -> dao.removeCard(card));
+            assertDoesNotThrow(() -> dao.removeCard("1"));
 
             // expected
-            verify(dao, times(1)).removeCard(card);
+            verify(dao, times(1)).removeCard("1");
             verify(connection, times(1)).prepareStatement(anyString());
             verify(connection, times(1)).setAutoCommit(false);
             verify(connection, times(1)).commit();
@@ -173,11 +172,10 @@ public class CardDaoTest {
             doThrow(SQLException.class).when(dao).getConnection(anyString(), anyString(), anyString());
 
             // test
-            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
-            assertThrows(DatabaseAccessException.class, () -> dao.removeCard(card));
+            assertThrows(DatabaseAccessException.class, () -> dao.removeCard("1"));
 
             // expected
-            verify(dao, times(1)).removeCard(card);
+            verify(dao, times(1)).removeCard("1");
             verify(dao, times(1)).getConnection(anyString(), anyString(), anyString());
         }
 
@@ -191,11 +189,10 @@ public class CardDaoTest {
             doThrow(SQLException.class).when(connection).prepareStatement(anyString());
 
             // test
-            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
-            assertThrows(DatabaseAccessException.class, () -> dao.removeCard(card));
+            assertThrows(DatabaseAccessException.class, () -> dao.removeCard("1"));
 
             // expected
-            verify(dao, times(1)).removeCard(card);
+            verify(dao, times(1)).removeCard("1");
             verify(dao, times(1)).getConnection(anyString(), anyString(), anyString());
             verify(connection, times(1)).prepareStatement(anyString());
             verify(connection, times(0)).setAutoCommit(false);

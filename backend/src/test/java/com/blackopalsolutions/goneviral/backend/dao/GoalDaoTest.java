@@ -135,11 +135,10 @@ public class GoalDaoTest {
       doReturn(statement).when(connection).prepareStatement(anyString());
 
       // test
-      Goal goal = new Goal("1", "2", "c");
-      assertDoesNotThrow(() -> dao.removeGoal(goal));
+      assertDoesNotThrow(() -> dao.removeGoal("1"));
 
       // expected
-      verify(dao, times(1)).removeGoal(goal);
+      verify(dao, times(1)).removeGoal("1");
       verify(connection, times(1)).prepareStatement(anyString());
       verify(connection, times(1)).setAutoCommit(false);
       verify(connection, times(1)).commit();
@@ -167,11 +166,10 @@ public class GoalDaoTest {
       doThrow(SQLException.class).when(dao).getConnection(anyString(), anyString(), anyString());
 
       // test
-      Goal goal = new Goal("1", "2", "c");
-      assertThrows(DatabaseAccessException.class, () -> dao.removeGoal(goal));
+      assertThrows(DatabaseAccessException.class, () -> dao.removeGoal("1"));
 
       // expected
-      verify(dao, times(1)).removeGoal(goal);
+      verify(dao, times(1)).removeGoal("1");
       verify(dao, times(1)).getConnection(anyString(), anyString(), anyString());
     }
 
@@ -185,11 +183,10 @@ public class GoalDaoTest {
       doThrow(SQLException.class).when(connection).prepareStatement(anyString());
 
       // test
-      Goal goal = new Goal("1", "2", "c");
-      assertThrows(DatabaseAccessException.class, () -> dao.removeGoal(goal));
+      assertThrows(DatabaseAccessException.class, () -> dao.removeGoal("1"));
 
       // expected
-      verify(dao, times(1)).removeGoal(goal);
+      verify(dao, times(1)).removeGoal("1");
       verify(dao, times(1)).getConnection(anyString(), anyString(), anyString());
       verify(connection, times(1)).prepareStatement(anyString());
       verify(connection, times(0)).setAutoCommit(false);

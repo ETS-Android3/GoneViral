@@ -1,0 +1,17 @@
+#!/bin/bash
+aws s3 cp ./build/libs/goneviral-backend-1.0.jar s3://goneviral-backend
+
+arr=("getGoal"
+  "getCard"
+  "removeGoal"
+  "removeCard"
+  "insertCard"
+  "insertGoal"
+  "updateCard"
+  "updateGoal"
+)
+
+for FUNCTION_NAME in "${arr[@]}"
+do
+  aws lambda update-function-code --function-name "$FUNCTION_NAME" --s3-bucket goneviral-backend --s3-key goneviral-backend-1.0.jar &
+done

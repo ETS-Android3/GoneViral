@@ -3,6 +3,7 @@ package com.blackopalsolutions.goneviral.backend.dao;
 import com.blackopalsolutions.goneviral.backend.model.domain.Goal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,93 @@ public class GoalDao extends Dao {
       }
     } catch (SQLException e) {
       log.error("Couldn't establish connection to the database!", e);
+      throw new DatabaseAccessException();
+    }
+  }
+
+  /**
+   * Retrieve the goal based on the id.
+   * @param id the id of the goal to retrieve.
+   * @return null if goal doesn't exist, otherwise the goal with the given id.
+   * @throws DatabaseAccessException if there was an error accessing the database.
+   */
+  public Goal getGoal(String id) throws DatabaseAccessException {
+    Goal goal = null;
+
+    try (Connection con = getConnection()) {
+      String sql = "SELECT * FROM goals WHERE goalId = ?";
+      try (PreparedStatement st = con.prepareStatement(sql)) {
+        // begin transaction
+        con.setAutoCommit(false);
+
+        // find goal
+        st.setString(1, id);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+          String goalId = rs.getString(1);
+          String roleId = rs.getString(2);
+          String condition = rs.getString(3);
+          goal = new Goal(goalId, roleId, condition);
+        }
+
+        // end transaction
+        con.commit();
+      } catch (SQLException e) {
+        try {
+          con.rollback();
+        } catch (SQLException ex) {
+          log.warn("Couldn't undo transaction.", ex);
+        }
+
+        log.error("Couldn't prepare statement!", e);
+        throw new DatabaseAccessException();
+      }
+    } catch (SQLException e) {
+      log.error("Couldn't access the database!", e);
+      throw new DatabaseAccessException();
+    }
+
+    return goal;
+  }
+
+  /**
+   * Updates a goal in the database.
+   * @param goal the updated goal.
+   * @throws DatabaseAccessException if there was an error accessing the database.
+   */
+  public void updateGoal(Goal goal) throws DatabaseAccessException {
+    if (goal == null) {
+      log.warn("Attempted to update a null goal.");
+      return;
+    }
+
+    try (Connection con = getConnection()) {
+      String sql = "UPDATE goals SET roleId = ?, condition = ? WHERE goalId = ?";
+      try (PreparedStatement st = con.prepareStatement(sql)) {
+        // begin transaction
+        con.setAutoCommit(false);
+
+        // update row
+        st.setString(1, goal.getRoleId());
+        st.setString(2, goal.getCondition());
+        st.setString(3, goal.getGoalId());
+
+        // execute and end transaction
+        st.executeQuery();
+        con.commit();
+      } catch (SQLException e) {
+        // undo transaction
+        try {
+          con.rollback();
+        } catch (SQLException ex) {
+          log.warn("Couldn't undo transaction.", ex);
+        }
+
+        log.error("Couldn't prepare statement!", e);
+        throw new DatabaseAccessException();
+      }
+    } catch (SQLException e) {
+      log.error("Couldn't access the database!", e);
       throw new DatabaseAccessException();
     }
   }

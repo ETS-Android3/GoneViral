@@ -1,9 +1,11 @@
 package com.blackopalsolutions.goneviral.backend.model.domain;
 
 public class Goal {
-  private final String goalId;
-  private final String roleId;
-  private final String condition;
+  private int goalId;
+  private int roleId;
+  private String condition;
+
+  public Goal() {}
 
   /**
    * Creates a goal object.
@@ -11,21 +13,33 @@ public class Goal {
    * @param roleId the role id associated with the goal.
    * @param condition the condition for winning the game.
    */
-  public Goal(String goalId, String roleId, String condition) {
+  public Goal(int goalId, int roleId, String condition) {
     this.goalId = goalId;
     this.roleId = roleId;
     this.condition = condition;
   }
 
-  public String getGoalId() {
+  public int getGoalId() {
     return goalId;
   }
 
-  public String getRoleId() {
+  public int getRoleId() {
     return roleId;
   }
 
   public String getCondition() {
     return condition;
+  }
+
+  public void setGoalId(int goalId) {
+    this.goalId = goalId;
+  }
+
+  public void setRoleId(int roleId) {
+    this.roleId = roleId;
+  }
+
+  public void setCondition(String condition) {
+    this.condition = condition;
   }
 }

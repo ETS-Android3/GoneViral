@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class GoalDao extends Dao {
   /**
@@ -18,15 +19,18 @@ public class GoalDao extends Dao {
     }
 
     try (Connection con = getConnection()) {
-      String sql = "INSERT INTO goals(id, roleId, condition) VALUES(?, ?, ?)";
+      String sql = "INSERT INTO goals(id, role_id, condition) VALUES(?, ?, ?)";
       try (PreparedStatement st = con.prepareStatement(sql)) {
         // begin transaction
         con.setAutoCommit(false);
 
         // create row and add to batch
         for (Goal goal : goals) {
-          st.setString(1, goal.getGoalId());
-          st.setString(2, goal.getRoleId());
+          if (goal == null) {
+            throw new DatabaseAccessException("Goal is null");
+          }
+          st.setInt(1, goal.getGoalId());
+          st.setInt(2, goal.getRoleId());
           st.setString(3, goal.getCondition());
           st.addBatch();
         }
@@ -40,10 +44,10 @@ public class GoalDao extends Dao {
           con.rollback();
         } catch (SQLException ignored) {}
 
-        throw new DatabaseAccessException();
+        throw new DatabaseAccessException("Couldn't insert goal.");
       }
     } catch (SQLException e) {
-      throw new DatabaseAccessException();
+      throw new DatabaseAccessException("Couldn't access database.");
     }
   }
 
@@ -66,8 +70,8 @@ public class GoalDao extends Dao {
         st.setString(1, id);
         ResultSet rs = st.executeQuery();
         if (rs.next()) {
-          String goalId = rs.getString("id");
-          String roleId = rs.getString("roleId");
+          int goalId = rs.getInt("id");
+          int roleId = rs.getInt("role_id");
           String condition = rs.getString("condition");
           goal = new Goal(goalId, roleId, condition);
         }
@@ -79,10 +83,10 @@ public class GoalDao extends Dao {
           con.rollback();
         } catch (SQLException ignored) {}
 
-        throw new DatabaseAccessException();
+        throw new DatabaseAccessException("Couldn't retrieve goal.");
       }
     } catch (SQLException e) {
-      throw new DatabaseAccessException();
+      throw new DatabaseAccessException("Couldn't access database.");
     }
 
     return goal;
@@ -99,15 +103,15 @@ public class GoalDao extends Dao {
     }
 
     try (Connection con = getConnection()) {
-      String sql = "UPDATE goals SET roleId = ?, condition = ? WHERE id = ?";
+      String sql = "UPDATE goals SET role_id = ?, condition = ? WHERE id = ?";
       try (PreparedStatement st = con.prepareStatement(sql)) {
         // begin transaction
         con.setAutoCommit(false);
 
         // update row
-        st.setString(1, goal.getRoleId());
+        st.setInt(1, goal.getRoleId());
         st.setString(2, goal.getCondition());
-        st.setString(3, goal.getGoalId());
+        st.setInt(3, goal.getGoalId());
 
         // execute and end transaction
         st.executeQuery();
@@ -118,10 +122,10 @@ public class GoalDao extends Dao {
           con.rollback();
         } catch (SQLException ignored) {}
 
-        throw new DatabaseAccessException();
+        throw new DatabaseAccessException("Couldn't update goal.");
       }
     } catch (SQLException e) {
-      throw new DatabaseAccessException();
+      throw new DatabaseAccessException("Couldn't access database.");
     }
   }
 
@@ -144,10 +148,10 @@ public class GoalDao extends Dao {
           con.rollback();
         } catch (SQLException ignored) {}
 
-        throw new DatabaseAccessException();
+        throw new DatabaseAccessException("Couldn't remove goal.");
       }
     } catch (SQLException e) {
-      throw new DatabaseAccessException();
+      throw new DatabaseAccessException("Couldn't access database.");
     }
   }
 }

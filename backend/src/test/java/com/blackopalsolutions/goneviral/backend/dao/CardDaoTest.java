@@ -51,7 +51,7 @@ public class CardDaoTest {
             doReturn(statement).when(connection).prepareStatement(anyString());
 
             // test
-            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
+            Card card = new Card(1, "t", 0, "d", "e", "ti", 0, "b", "f");
             assertDoesNotThrow(() -> dao.insertCards(card));
 
             // expected
@@ -74,9 +74,9 @@ public class CardDaoTest {
             doReturn(statement).when(connection).prepareStatement(anyString());
 
             // test
-            Card c1 = new Card("1", "t1", 0, "d1", "e1", "ti1", 1, "b1", "f1");
-            Card c2 = new Card("2", "t2", 1, "d2", "e2", "ti2", 2, "b2", "f2");
-            Card c3 = new Card("3", "t3", 2, "d3", "e3", "ti3", 3, "b3", "f3");
+            Card c1 = new Card(1, "t1", 0, "d1", "e1", "ti1", 1, "b1", "f1");
+            Card c2 = new Card(2, "t2", 1, "d2", "e2", "ti2", 2, "b2", "f2");
+            Card c3 = new Card(3, "t3", 2, "d3", "e3", "ti3", 3, "b3", "f3");
             assertDoesNotThrow(() -> dao.insertCards(c1, c2, c3));
 
             // expected
@@ -98,7 +98,7 @@ public class CardDaoTest {
             doThrow(SQLException.class).when(dao).getConnection(anyString(), anyString(), anyString());
 
             // test
-            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
+            Card card = new Card(1, "t", 0, "d", "e", "ti", 0, "b", "f");
             assertThrows(DatabaseAccessException.class, () -> dao.insertCards(card));
         }
 
@@ -111,12 +111,12 @@ public class CardDaoTest {
             doThrow(SQLException.class).when(connection).prepareStatement(anyString());
 
             // test
-            Card card = new Card("1", "t", 0, "d", "e", "ti", 0, "b", "f");
+            Card card = new Card(1, "t", 0, "d", "e", "ti", 0, "b", "f");
             assertThrows(DatabaseAccessException.class, () -> dao.insertCards(card));
         }
 
         private void verifyStatement(PreparedStatement statement, Card card) throws SQLException {
-            verify(statement, times(1)).setString(1, card.getCardId());
+            verify(statement, times(1)).setInt(1, card.getCardId());
             verify(statement, times(1)).setString(2, card.getType());
             verify(statement, times(1)).setInt(3, card.getCost());
             verify(statement, times(1)).setString(4, card.getDescription());

@@ -20,7 +20,7 @@ public class CardDao extends Dao {
 
         try (Connection con = getConnection()) {
             String query = "INSERT INTO cards(id, type, cost, description,"
-                    + " effect, title, value, backTexture, frontTexture)"
+                    + " effect, title, value, back_texture, front_texture)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement st = con.prepareStatement(query)) {
                 // begin transaction
@@ -28,7 +28,7 @@ public class CardDao extends Dao {
 
                 // create row and add to batch
                 for (Card card : cards) {
-                    st.setString(1, card.getCardId());
+                    st.setInt(1, card.getCardId());
                     st.setString(2, card.getType());
                     st.setInt(3, card.getCost());
                     st.setString(4, card.getDescription());
@@ -75,15 +75,15 @@ public class CardDao extends Dao {
                 st.setString(1, id);
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
-                    String cardId = rs.getString("id");
+                    int cardId = rs.getInt("id");
                     String type = rs.getString("type");
                     int cost = rs.getInt("cost");
                     String description = rs.getString("description");
                     String effect = rs.getString("effect");
                     String title = rs.getString("title");
                     int value = rs.getInt("value");
-                    String back = rs.getString("backTexture");
-                    String front = rs.getString("frontTexture");
+                    String back = rs.getString("back_texture");
+                    String front = rs.getString("front_texture");
                     card = new Card(cardId, type, cost, description, effect, title, value, back, front);
                 }
 
@@ -116,7 +116,7 @@ public class CardDao extends Dao {
 
         try (Connection con = getConnection()) {
             String sql = "UPDATE cards SET type = ?, cost = ?, description = ?,"
-                    + " effect = ?, title = ?, value = ?, backTexture = ?, frontTexture = ?"
+                    + " effect = ?, title = ?, value = ?, back_texture = ?, front_texture = ?"
                     + " WHERE id = ?";
             try (PreparedStatement st = con.prepareStatement(sql)) {
                 // begin transaction
@@ -131,7 +131,7 @@ public class CardDao extends Dao {
                 st.setInt(6, card.getValue());
                 st.setString(7, card.getBackTexture());
                 st.setString(8, card.getFrontTexture());
-                st.setString(9, card.getCardId());
+                st.setInt(9, card.getCardId());
 
                 // execute and end transaction
                 st.executeQuery();

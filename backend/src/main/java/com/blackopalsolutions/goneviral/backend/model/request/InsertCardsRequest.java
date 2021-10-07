@@ -2,14 +2,19 @@ package com.blackopalsolutions.goneviral.backend.model.request;
 
 import com.blackopalsolutions.goneviral.backend.model.domain.Card;
 
-public class InsertCardsRequest {
-    private Card[] cards;
+import java.util.List;
 
-    public void setCards(Card[] cards) {
+public class InsertCardsRequest {
+    private List<Card> cards;
+
+    public void setCards(List<Card> cards) {
         this.cards = cards;
     }
 
     public Card[] getCards() {
-        return cards;
+        if (cards == null) {
+            return new Card[0];
+        }
+        return cards.toArray(new Card[0]);
     }
 }

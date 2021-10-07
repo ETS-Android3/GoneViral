@@ -1,15 +1,17 @@
 package com.blackopalsolutions.goneviral.backend.model.domain;
 
 public class Card {
-    private final String cardId;
-    private final String type;
-    private final int cost;
-    private final String description;
-    private final String effect;
-    private final String title;
-    private final int value;
-    private final String backTexture;
-    private final String frontTexture;
+    private int cardId;
+    private String type;
+    private int cost;
+    private String description;
+    private String effect;
+    private String title;
+    private int value;
+    private String backTexture;
+    private String frontTexture;
+
+    public Card() {}
 
     /**
      * Creates a card model.
@@ -23,7 +25,7 @@ public class Card {
      * @param backTexture the filename for the texture on the back of the card.
      * @param frontTexture the filename for the texture on the front of the card.
      */
-    public Card(String cardId, String type, int cost, String description, String effect,
+    public Card(int cardId, String type, int cost, String description, String effect,
                 String title, int value, String backTexture, String frontTexture) {
         this.cardId = cardId;
         this.type = type;
@@ -36,7 +38,7 @@ public class Card {
         this.frontTexture = frontTexture;
     }
 
-    public String getCardId() {
+    public int getCardId() {
         return cardId;
     }
 
@@ -70,5 +72,41 @@ public class Card {
 
     public String getFrontTexture() {
         return frontTexture;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setEffect(String effect) {
+        this.effect = effect;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setBackTexture(String backTexture) {
+        this.backTexture = backTexture;
+    }
+
+    public void setFrontTexture(String frontTexture) {
+        this.frontTexture = frontTexture;
     }
 }

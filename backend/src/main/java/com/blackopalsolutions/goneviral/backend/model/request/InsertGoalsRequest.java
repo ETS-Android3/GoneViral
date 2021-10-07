@@ -2,14 +2,19 @@ package com.blackopalsolutions.goneviral.backend.model.request;
 
 import com.blackopalsolutions.goneviral.backend.model.domain.Goal;
 
-public class InsertGoalsRequest {
-    private Goal[] goals;
+import java.util.List;
 
-    public void setGoals(Goal[] goals) {
+public class InsertGoalsRequest {
+    private List<Goal> goals;
+
+    public void setGoals(List<Goal> goals) {
         this.goals = goals;
     }
 
     public Goal[] getGoals() {
-        return goals;
+        if (goals == null) {
+            return new Goal[0];
+        }
+        return goals.toArray(new Goal[0]);
     }
 }

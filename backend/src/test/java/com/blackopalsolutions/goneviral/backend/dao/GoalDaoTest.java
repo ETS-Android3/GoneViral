@@ -49,7 +49,7 @@ public class GoalDaoTest {
       doReturn(statement).when(connection).prepareStatement(anyString());
 
       // test
-      Goal goal = new Goal("1", "2", "condition");
+      Goal goal = new Goal(1, 2, "condition");
       assertDoesNotThrow(() -> dao.insertGoals(goal));
 
       // expected
@@ -57,8 +57,8 @@ public class GoalDaoTest {
       verify(connection, times(1)).prepareStatement(anyString());
       verify(connection, times(1)).setAutoCommit(false);
       verify(connection, times(1)).commit();
-      verify(statement, times(1)).setString(1, "1");
-      verify(statement, times(1)).setString(2, "2");
+      verify(statement, times(1)).setInt(1, 1);
+      verify(statement, times(1)).setInt(2, 2);
       verify(statement, times(1)).setString(3, "condition");
       verify(statement, times(1)).addBatch();
       verify(statement, times(1)).executeBatch();
@@ -74,9 +74,9 @@ public class GoalDaoTest {
       doReturn(statement).when(connection).prepareStatement(anyString());
 
       // test
-      Goal g1 = new Goal("1", "2", "c1");
-      Goal g2 = new Goal("3", "4", "c2");
-      Goal g3 = new Goal("5", "6", "c3");
+      Goal g1 = new Goal(1, 2, "c1");
+      Goal g2 = new Goal(3, 4, "c2");
+      Goal g3 = new Goal(5, 6, "c3");
       assertDoesNotThrow(() -> dao.insertGoals(g1, g2, g3));
 
       // expected
@@ -84,14 +84,14 @@ public class GoalDaoTest {
       verify(connection, times(1)).prepareStatement(anyString());
       verify(connection, times(1)).setAutoCommit(false);
       verify(connection, times(1)).commit();
-      verify(statement, times(1)).setString(1, "1");
-      verify(statement, times(1)).setString(2, "2");
+      verify(statement, times(1)).setInt(1, 1);
+      verify(statement, times(1)).setInt(2, 2);
       verify(statement, times(1)).setString(3, "c1");
-      verify(statement, times(1)).setString(1, "3");
-      verify(statement, times(1)).setString(2, "4");
+      verify(statement, times(1)).setInt(1, 3);
+      verify(statement, times(1)).setInt(2, 4);
       verify(statement, times(1)).setString(3, "c2");
-      verify(statement, times(1)).setString(1, "5");
-      verify(statement, times(1)).setString(2, "6");
+      verify(statement, times(1)).setInt(1, 5);
+      verify(statement, times(1)).setInt(2, 6);
       verify(statement, times(1)).setString(3, "c3");
       verify(statement, times(3)).addBatch();
       verify(statement, times(1)).executeBatch();
@@ -104,7 +104,7 @@ public class GoalDaoTest {
       doThrow(SQLException.class).when(dao).getConnection(anyString(), anyString(), anyString());
 
       // test
-      Goal goal = new Goal("1", "2", "c1");
+      Goal goal = new Goal(1, 2, "c1");
       assertThrows(DatabaseAccessException.class, () -> dao.insertGoals(goal));
     }
 
@@ -117,7 +117,7 @@ public class GoalDaoTest {
       doThrow(SQLException.class).when(connection).prepareStatement(anyString());
 
       // test
-      Goal goal = new Goal("1", "2", "c1");
+      Goal goal = new Goal(1, 2, "c1");
       assertThrows(DatabaseAccessException.class, () -> dao.insertGoals(goal));
     }
   }

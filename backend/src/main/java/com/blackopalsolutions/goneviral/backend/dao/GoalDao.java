@@ -5,12 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GoalDao extends Dao {
-  private static final Logger log = LoggerFactory.getLogger(GoalDao.class);
-
   /**
    * Inserts goals into the database.
    * @param goals the goals to insert.
@@ -18,7 +14,6 @@ public class GoalDao extends Dao {
    */
   public void insertGoals(Goal... goals) throws DatabaseAccessException {
     if (goals == null || goals.length == 0) {
-      log.warn("Attempted to insert 0 goals");
       return;
     }
 
@@ -43,15 +38,11 @@ public class GoalDao extends Dao {
         // undo transaction
         try {
           con.rollback();
-        } catch (SQLException ex) {
-          log.warn("Couldn't rollback connection.", ex);
-        }
+        } catch (SQLException ignored) {}
 
-        log.error("Couldn't create statement!", e);
         throw new DatabaseAccessException();
       }
     } catch (SQLException e) {
-      log.error("Couldn't establish connection to the database!", e);
       throw new DatabaseAccessException();
     }
   }
@@ -86,15 +77,11 @@ public class GoalDao extends Dao {
       } catch (SQLException e) {
         try {
           con.rollback();
-        } catch (SQLException ex) {
-          log.warn("Couldn't undo transaction.", ex);
-        }
+        } catch (SQLException ignored) {}
 
-        log.error("Couldn't prepare statement!", e);
         throw new DatabaseAccessException();
       }
     } catch (SQLException e) {
-      log.error("Couldn't access the database!", e);
       throw new DatabaseAccessException();
     }
 
@@ -108,7 +95,6 @@ public class GoalDao extends Dao {
    */
   public void updateGoal(Goal goal) throws DatabaseAccessException {
     if (goal == null) {
-      log.warn("Attempted to update a null goal.");
       return;
     }
 
@@ -130,15 +116,11 @@ public class GoalDao extends Dao {
         // undo transaction
         try {
           con.rollback();
-        } catch (SQLException ex) {
-          log.warn("Couldn't undo transaction.", ex);
-        }
+        } catch (SQLException ignored) {}
 
-        log.error("Couldn't prepare statement!", e);
         throw new DatabaseAccessException();
       }
     } catch (SQLException e) {
-      log.error("Couldn't access the database!", e);
       throw new DatabaseAccessException();
     }
   }
@@ -150,7 +132,6 @@ public class GoalDao extends Dao {
    */
   public void removeGoal(Goal goal) throws DatabaseAccessException {
     if (goal == null) {
-      log.warn("Goal to remove is null");
       return;
     }
 
@@ -165,15 +146,11 @@ public class GoalDao extends Dao {
         // undo transaction
         try {
           con.rollback();
-        } catch (SQLException ex) {
-          log.warn("Couldn't rollback connection.", ex);
-        }
+        } catch (SQLException ignored) {}
 
-        log.error("Couldn't create statement!", e);
         throw new DatabaseAccessException();
       }
     } catch (SQLException e) {
-      log.error("Couldn't establish a connection to the database!", e);
       throw new DatabaseAccessException();
     }
   }

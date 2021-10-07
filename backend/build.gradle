@@ -22,10 +22,6 @@ dependencies {
     // Database
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.24'
 
-    // Logging
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha1'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j18-impl', version: '2.14.0'
-
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.12.4'
@@ -34,4 +30,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    archiveBaseName = 'goneviral-backend'
+    archiveVersion = '1.0'
 }

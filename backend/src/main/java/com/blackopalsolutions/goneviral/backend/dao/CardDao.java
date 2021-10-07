@@ -1,6 +1,6 @@
-package com.blackopalsolutions.goneviral.dao;
+package com.blackopalsolutions.goneviral.backend.dao;
 
-import com.blackopalsolutions.goneviral.model.Card;
+import com.blackopalsolutions.goneviral.backend.model.domain.Card;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

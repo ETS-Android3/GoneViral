@@ -1,10 +1,9 @@
-package com.blackopalsolutions.goneviral.dao;
+package com.blackopalsolutions.goneviral.backend.dao;
 
-import com.blackopalsolutions.goneviral.util.PropertiesReader;
-import com.blackopalsolutions.goneviral.util.PropertyKeys;
+import com.blackopalsolutions.goneviral.backend.util.PropertiesReader;
+import com.blackopalsolutions.goneviral.backend.util.PropertyKeys;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 abstract class Dao {

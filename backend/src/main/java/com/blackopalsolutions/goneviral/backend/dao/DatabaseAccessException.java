@@ -1,4 +1,4 @@
-package com.blackopalsolutions.goneviral.dao;
+package com.blackopalsolutions.goneviral.backend.dao;
 
 public class DatabaseAccessException extends Exception {
 }

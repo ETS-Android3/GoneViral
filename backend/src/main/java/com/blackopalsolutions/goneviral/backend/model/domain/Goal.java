@@ -1,4 +1,4 @@
-package com.blackopalsolutions.goneviral.model;
+package com.blackopalsolutions.goneviral.backend.model.domain;
 
 public class Goal {
   private final String goalId;

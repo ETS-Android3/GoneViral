@@ -1,4 +1,4 @@
-package com.blackopalsolutions.goneviral.util;
+package com.blackopalsolutions.goneviral.backend.util;
 
 /**
  * Stores static property keys.

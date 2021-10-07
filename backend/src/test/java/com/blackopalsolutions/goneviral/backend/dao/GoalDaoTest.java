@@ -1,9 +1,9 @@
-package com.blackopalsolutions.goneviral.dao;
+package com.blackopalsolutions.goneviral.backend.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.blackopalsolutions.goneviral.model.Goal;
+import com.blackopalsolutions.goneviral.backend.model.domain.Goal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

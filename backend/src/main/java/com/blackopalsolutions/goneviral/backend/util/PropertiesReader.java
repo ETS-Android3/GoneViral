@@ -1,4 +1,4 @@
-package com.blackopalsolutions.goneviral.util;
+package com.blackopalsolutions.goneviral.backend.util;
 
 import java.io.IOException;
 import java.net.URL;

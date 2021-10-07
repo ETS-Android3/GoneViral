@@ -1,9 +1,9 @@
-package com.blackopalsolutions.goneviral.dao;
+package com.blackopalsolutions.goneviral.backend.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.blackopalsolutions.goneviral.model.Card;
+import com.blackopalsolutions.goneviral.backend.model.domain.Card;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -127,19 +127,15 @@ public class GoalDao extends Dao {
 
   /**
    * Removes a goal from the database.
-   * @param goal the goal to remove.
+   * @param id the id of the goal to remove.
    * @throws DatabaseAccessException if there was an error accessing the database.
    */
-  public void removeGoal(Goal goal) throws DatabaseAccessException {
-    if (goal == null) {
-      return;
-    }
-
+  public void removeGoal(String id) throws DatabaseAccessException {
     try (Connection con = getConnection()) {
       String query = "DELETE FROM goals WHERE goalId = ?";
       try (PreparedStatement st = con.prepareStatement(query)) {
         con.setAutoCommit(false);
-        st.setString(1, goal.getGoalId());
+        st.setString(1, id);
         st.executeQuery();
         con.commit();
       } catch (SQLException e) {

@@ -151,19 +151,15 @@ public class CardDao extends Dao {
 
     /**
      * Removes a card from the database.
-     * @param card the card to remove.
+     * @param id the id of the card to remove.
      * @throws DatabaseAccessException if there was an error accessing the database.
      */
-    public void removeCard(Card card) throws DatabaseAccessException {
-        if (card == null) {
-            return;
-        }
-
+    public void removeCard(String id) throws DatabaseAccessException {
         try (Connection con = getConnection()) {
             String sql = "DELETE FROM cards WHERE cardId = ?";
             try (PreparedStatement st = con.prepareStatement(sql)) {
                 con.setAutoCommit(false);
-                st.setString(1, card.getCardId());
+                st.setString(1, id);
                 st.executeQuery();
                 con.commit();
             } catch (SQLException e) {

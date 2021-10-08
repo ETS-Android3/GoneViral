@@ -2,19 +2,17 @@ package com.blackopalsolutions.goneviral.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.blackopalsolutions.goneviral.Greeting
-import android.widget.TextView
-
-fun greet(): String {
-    return Greeting().greeting()
-}
+import android.widget.Button
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        val viewHandBtn = findViewById<Button>(R.id.view_hand_button)
+        viewHandBtn.setOnClickListener {
+            Toast.makeText(this@MainActivity, "TODO: show hand", Toast.LENGTH_SHORT).show()
+        }
     }
 }

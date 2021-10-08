@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 public class GoalDao extends Dao {
   /**
@@ -28,9 +27,8 @@ public class GoalDao extends Dao {
         ResultSet rs = st.executeQuery();
         if (rs.next()) {
           int goalId = rs.getInt("id");
-          int roleId = rs.getInt("role_id");
           String condition = rs.getString("condition");
-          goal = new Goal(goalId, roleId, condition);
+          goal = new Goal(goalId, condition);
         }
 
         // end transaction

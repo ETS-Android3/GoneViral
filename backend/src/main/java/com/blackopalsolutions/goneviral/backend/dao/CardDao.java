@@ -47,10 +47,10 @@ public class CardDao extends Dao {
                     con.rollback();
                 } catch (SQLException ignored) {}
 
-                throw new DatabaseAccessException();
+                throw new DatabaseAccessException("Couldn't retrieve card.");
             }
         } catch (SQLException e) {
-            throw new DatabaseAccessException();
+            throw new DatabaseAccessException("Couldn't access database.");
         }
 
         return card;

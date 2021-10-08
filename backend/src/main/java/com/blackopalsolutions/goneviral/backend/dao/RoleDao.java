@@ -30,11 +30,10 @@ public class RoleDao extends Dao {
                 if (rs.next()) {
                     int roleId = rs.getInt("id");
                     String ability = rs.getString("ability");
-                    String description = rs.getString("description");
                     String title = rs.getString("title");
                     String backTexture = rs.getString("back_texture");
                     String frontTexture = rs.getString("front_texture");
-                    role = new Role(roleId, ability, description, title, backTexture, frontTexture);
+                    role = new Role(roleId, ability, title, backTexture, frontTexture);
                 }
 
                 // end transaction

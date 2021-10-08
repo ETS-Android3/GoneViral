@@ -3,7 +3,6 @@ package com.blackopalsolutions.goneviral.backend.model.domain;
 public class Role {
     private int id;
     private String ability;
-    private String description;
     private String title;
     private String backTexture;
     private String frontTexture;
@@ -17,16 +16,13 @@ public class Role {
      * Creates a Role object.
      * @param id the role's id.
      * @param ability the role's ability.
-     * @param description the role's description.
      * @param title the role's title.
      * @param backTexture the back texture for the role.
      * @param frontTexture the front texture for the role.
      */
-    public Role(int id, String ability, String description, String title, String backTexture,
-                String frontTexture) {
+    public Role(int id, String ability, String title, String backTexture, String frontTexture) {
         this.id = id;
         this.ability = ability;
-        this.description = description;
         this.title = title;
         this.backTexture = backTexture;
         this.frontTexture = frontTexture;
@@ -38,10 +34,6 @@ public class Role {
 
     public void setAbility(String ability) {
         this.ability = ability;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setTitle(String title) {
@@ -62,10 +54,6 @@ public class Role {
 
     public String getAbility() {
         return ability;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public String getTitle() {

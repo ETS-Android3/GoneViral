@@ -15,7 +15,7 @@ public class RoleDao extends Dao {
      * @return the role if it exists, otherwise null.
      * @throws DatabaseAccessException if error accessing the database.
      */
-    public Role getRole(String id) throws DatabaseAccessException {
+    public Role getRole(int id) throws DatabaseAccessException {
         Role role = null;
 
         try (Connection con = getConnection()) {
@@ -25,7 +25,7 @@ public class RoleDao extends Dao {
                 con.setAutoCommit(false);
 
                 // find role
-                st.setString(1, id);
+                st.setInt(1, id);
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
                     int roleId = rs.getInt("id");

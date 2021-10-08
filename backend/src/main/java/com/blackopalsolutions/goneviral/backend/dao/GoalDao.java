@@ -13,7 +13,7 @@ public class GoalDao extends Dao {
    * @return null if goal doesn't exist, otherwise the goal with the given id.
    * @throws DatabaseAccessException if there was an error accessing the database.
    */
-  public Goal getGoal(String id) throws DatabaseAccessException {
+  public Goal getGoal(int id) throws DatabaseAccessException {
     Goal goal = null;
 
     try (Connection con = getConnection()) {
@@ -23,7 +23,7 @@ public class GoalDao extends Dao {
         con.setAutoCommit(false);
 
         // find goal
-        st.setString(1, id);
+        st.setInt(1, id);
         ResultSet rs = st.executeQuery();
         if (rs.next()) {
           int goalId = rs.getInt("id");

@@ -14,7 +14,7 @@ public class CardDao extends Dao {
      * @return null if the card isn't in the database, otherwise the card.
      * @throws DatabaseAccessException if there was an error accessing the database.
      */
-    public Card getCard(String id) throws DatabaseAccessException {
+    public Card getCard(int id) throws DatabaseAccessException {
         Card card = null;
 
         try (Connection con = getConnection()) {
@@ -24,7 +24,7 @@ public class CardDao extends Dao {
                 con.setAutoCommit(false);
 
                 // find card
-                st.setString(1, id);
+                st.setInt(1, id);
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
                     int cardId = rs.getInt("id");

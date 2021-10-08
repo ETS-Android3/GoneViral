@@ -1,13 +1,13 @@
 package com.blackopalsolutions.goneviral.backend.model.request;
 
 public class IdRequest {
-    private String id;
+    private int id;
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

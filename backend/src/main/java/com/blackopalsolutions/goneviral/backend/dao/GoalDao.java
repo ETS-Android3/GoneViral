@@ -1,6 +1,6 @@
 package com.blackopalsolutions.goneviral.backend.dao;
 
-import com.blackopalsolutions.goneviral.backend.model.domain.Goal;
+import com.blackopalsolutions.goneviral.model.domain.Goal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

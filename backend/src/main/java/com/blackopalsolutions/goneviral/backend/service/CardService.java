@@ -2,9 +2,9 @@ package com.blackopalsolutions.goneviral.backend.service;
 
 import com.blackopalsolutions.goneviral.backend.dao.CardDao;
 import com.blackopalsolutions.goneviral.backend.dao.DatabaseAccessException;
-import com.blackopalsolutions.goneviral.backend.model.domain.Card;
-import com.blackopalsolutions.goneviral.backend.model.request.IdRequest;
-import com.blackopalsolutions.goneviral.backend.model.response.GetCardResponse;
+import com.blackopalsolutions.goneviral.model.domain.Card;
+import com.blackopalsolutions.goneviral.model.request.IdRequest;
+import com.blackopalsolutions.goneviral.model.response.GetCardResponse;
 
 public class CardService {
     private final CardDao dao = getCardDao();

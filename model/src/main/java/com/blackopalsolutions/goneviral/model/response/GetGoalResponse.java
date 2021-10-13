@@ -1,6 +1,6 @@
-package com.blackopalsolutions.goneviral.backend.model.response;
+package com.blackopalsolutions.goneviral.model.response;
 
-import com.blackopalsolutions.goneviral.backend.model.domain.Goal;
+import com.blackopalsolutions.goneviral.model.domain.Goal;
 
 public class GetGoalResponse extends Response {
 

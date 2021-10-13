@@ -1,6 +1,6 @@
 package com.blackopalsolutions.goneviral.backend.dao;
 
-import com.blackopalsolutions.goneviral.backend.model.domain.Card;
+import com.blackopalsolutions.goneviral.model.domain.Card;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

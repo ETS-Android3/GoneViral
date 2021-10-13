@@ -1,4 +1,4 @@
-package com.blackopalsolutions.goneviral.backend.model.request;
+package com.blackopalsolutions.goneviral.model.request;
 
 public class IdRequest {
     private int id;

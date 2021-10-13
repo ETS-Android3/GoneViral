@@ -1,4 +1,4 @@
-package com.blackopalsolutions.goneviral.backend.model.domain;
+package com.blackopalsolutions.goneviral.model.domain;
 
 public class Card {
     private int cardId;

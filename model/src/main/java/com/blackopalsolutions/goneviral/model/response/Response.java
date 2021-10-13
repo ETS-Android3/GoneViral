@@ -1,4 +1,4 @@
-package com.blackopalsolutions.goneviral.backend.model.response;
+package com.blackopalsolutions.goneviral.model.response;
 
 public class Response {
     private final boolean success;

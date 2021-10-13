@@ -2,9 +2,9 @@ package com.blackopalsolutions.goneviral.backend.service;
 
 import com.blackopalsolutions.goneviral.backend.dao.DatabaseAccessException;
 import com.blackopalsolutions.goneviral.backend.dao.RoleDao;
-import com.blackopalsolutions.goneviral.backend.model.domain.Role;
-import com.blackopalsolutions.goneviral.backend.model.request.IdRequest;
-import com.blackopalsolutions.goneviral.backend.model.response.GetRoleResponse;
+import com.blackopalsolutions.goneviral.model.domain.Role;
+import com.blackopalsolutions.goneviral.model.request.IdRequest;
+import com.blackopalsolutions.goneviral.model.response.GetRoleResponse;
 
 public class RoleService {
     private final RoleDao dao = getRoleDao();

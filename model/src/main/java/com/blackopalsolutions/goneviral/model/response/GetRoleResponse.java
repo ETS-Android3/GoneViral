@@ -1,6 +1,6 @@
-package com.blackopalsolutions.goneviral.backend.model.response;
+package com.blackopalsolutions.goneviral.model.response;
 
-import com.blackopalsolutions.goneviral.backend.model.domain.Role;
+import com.blackopalsolutions.goneviral.model.domain.Role;
 
 public class GetRoleResponse extends Response {
     private final Role role;

@@ -22,6 +22,7 @@ dependencies {
 
     // Database
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.24'
+    implementation project(path: ':model')
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'

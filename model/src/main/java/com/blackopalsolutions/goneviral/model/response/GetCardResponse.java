@@ -1,6 +1,6 @@
-package com.blackopalsolutions.goneviral.backend.model.response;
+package com.blackopalsolutions.goneviral.model.response;
 
-import com.blackopalsolutions.goneviral.backend.model.domain.Card;
+import com.blackopalsolutions.goneviral.model.domain.Card;
 
 public class GetCardResponse extends Response {
     private final Card card;

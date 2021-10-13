@@ -2,8 +2,8 @@ package com.blackopalsolutions.goneviral.backend.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.blackopalsolutions.goneviral.backend.model.request.IdRequest;
-import com.blackopalsolutions.goneviral.backend.model.response.GetGoalResponse;
+import com.blackopalsolutions.goneviral.model.request.IdRequest;
+import com.blackopalsolutions.goneviral.model.response.GetGoalResponse;
 import com.blackopalsolutions.goneviral.backend.service.GoalService;
 
 public class GetGoalHandler implements RequestHandler<IdRequest, GetGoalResponse> {

@@ -2,9 +2,9 @@ package com.blackopalsolutions.goneviral.backend.service;
 
 import com.blackopalsolutions.goneviral.backend.dao.DatabaseAccessException;
 import com.blackopalsolutions.goneviral.backend.dao.GoalDao;
-import com.blackopalsolutions.goneviral.backend.model.domain.Goal;
-import com.blackopalsolutions.goneviral.backend.model.request.IdRequest;
-import com.blackopalsolutions.goneviral.backend.model.response.GetGoalResponse;
+import com.blackopalsolutions.goneviral.model.domain.Goal;
+import com.blackopalsolutions.goneviral.model.request.IdRequest;
+import com.blackopalsolutions.goneviral.model.response.GetGoalResponse;
 
 public class GoalService {
     private final GoalDao dao = getGoalDao();

@@ -55,3 +55,6 @@ android {
         targetSdkVersion(30)
     }
 }
+dependencies {
+    implementation(project(mapOf("path" to ":model")))
+}

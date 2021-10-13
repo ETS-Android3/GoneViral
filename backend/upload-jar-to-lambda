@@ -6,6 +6,10 @@ arr=("getGoal"
   "getRole"
   "getGoalFromRole"
   "getRoleFromGoal"
+  "getUser"
+  "insertUsers"
+  "removeUser"
+  "updateUser"
 )
 
 for FUNCTION_NAME in "${arr[@]}"

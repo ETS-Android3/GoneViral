@@ -4,6 +4,8 @@ aws s3 cp ./build/libs/backend-1.0-all.jar s3://goneviral-backend
 arr=("getGoal"
   "getCard"
   "getRole"
+  "getGoalFromRole"
+  "getRoleFromGoal"
 )
 
 for FUNCTION_NAME in "${arr[@]}"

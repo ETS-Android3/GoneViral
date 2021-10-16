@@ -7,6 +7,18 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/draw_card_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24px"
+        android:layout_marginTop="24px"
+        android:layout_marginBottom="192px"
+        android:layout_marginRight="24px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/draw_card_button_label" />
+
+    <Button
         android:id="@+id/view_hand_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

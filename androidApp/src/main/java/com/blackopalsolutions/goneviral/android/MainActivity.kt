@@ -2,6 +2,7 @@ package com.blackopalsolutions.goneviral.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.content.Intent
 import android.widget.Button
 import android.widget.Toast
 
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewHandBtn.setOnClickListener {
-            Toast.makeText(this@MainActivity, "# of cards in hand: $numOfCardsInHand", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, ViewHandActivity::class.java);
+            startActivity(intent)
         }
     }
 }

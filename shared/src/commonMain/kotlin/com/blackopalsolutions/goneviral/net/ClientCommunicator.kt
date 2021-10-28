@@ -19,9 +19,14 @@ class ClientCommunicator(private val baseUrl: String) {
         fun sendRequest(conn: HttpURLConnection)
     }
 
+    fun getUrl(url: String): URL {
+        val str = baseUrl + (if (url.startsWith("/")) "" else "/") + url
+        return URL(str)
+    }
+
     @ExperimentalSerializationApi
-    inline fun <reified T> doPost(urlPath: String, requestInfo: Serializable,
-                                     headers: Map<String, String>?): T {
+    inline fun <reified T> doPost(urlPath: String, requestInfo: Any?,
+                                  headers: Map<String, String>?): T {
         val strategy = object: RequestStrategy {
             override fun setRequestMethod(conn: HttpURLConnection) {
                 conn.setRequestMethod("POST")
@@ -50,7 +55,7 @@ class ClientCommunicator(private val baseUrl: String) {
         var conn: HttpURLConnection? = null
 
         try {
-            val url = URL(urlPath)
+            val url = getUrl(urlPath)
             conn = url.openConnection() as HttpURLConnection
             conn.setReadTimeout(timeOutMillis)
             strategy.setRequestMethod(conn)

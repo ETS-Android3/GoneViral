@@ -6,7 +6,7 @@ import com.blackopalsolutions.goneviral.android.model.service.handler.MessageHan
 import com.blackopalsolutions.goneviral.net.ServerFacade
 import java.lang.Exception
 
-abstract class BackgroundTask protected constructor(private val handler: MessageHandler) : Runnable {
+abstract class BackgroundTask protected constructor(private val handler: MessageHandler) {
     private var facade: ServerFacade? = null
 
     fun getServerFacade(): ServerFacade {
@@ -16,7 +16,7 @@ abstract class BackgroundTask protected constructor(private val handler: Message
         return facade!!
     }
 
-    override fun run() {
+    fun run() {
         try {
             doTask()
         } catch (exception: Exception) {

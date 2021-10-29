@@ -14,10 +14,15 @@ class ViewHandActivity : AppCompatActivity() {
         val handRecyclerView = findViewById<RecyclerView>(R.id.hand_recycler_view)
         handRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val data = ArrayList<CardsViewModel>()
+        val cardSlugs = intent.getStringArrayExtra("cardsInHand")
 
-        // TODO: display the actual hand, mocked data below
-        for (i in 1..7) {
-            data.add(CardsViewModel(R.drawable.back_to_school))
+        println(cardSlugs?.joinToString())
+
+        if (cardSlugs != null) {
+            for (i in cardSlugs) {
+                val id = this.applicationContext.resources.getIdentifier(i, "drawable", this.applicationContext.packageName)
+                data.add(CardsViewModel(id))
+            }
         }
 
         val adapter = CustomAdapter(data)

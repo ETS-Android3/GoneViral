@@ -47,8 +47,9 @@ class MainActivity : AppCompatActivity(), ServiceObserver<GetCardResponse> {
     }
 
     override fun handleException(exception: Exception) {
-        Toast.makeText(this@MainActivity, exception.stackTrace.joinToString(), Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, "There was an exception!", Toast.LENGTH_LONG).show()
         println("**************************************************")
-        println(exception.stackTrace.joinToString())
+        println(exception.message)
+        println(exception.stackTrace.joinToString(",\n"))
     }
 }

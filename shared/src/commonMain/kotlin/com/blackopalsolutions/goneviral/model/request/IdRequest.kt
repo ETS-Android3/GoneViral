@@ -1,7 +1,8 @@
 package com.blackopalsolutions.goneviral.model.request
 
-import kotlinx.serialization.Serializable
+class IdRequest(val id: Int): Request() {
 
-@Serializable
-class IdRequest(val id: Int) {
+    override fun encodeToJsonString(): String =
+        "{id:${id}}"
+
 }

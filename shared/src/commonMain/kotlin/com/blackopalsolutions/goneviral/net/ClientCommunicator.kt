@@ -1,5 +1,6 @@
 package com.blackopalsolutions.goneviral.net
 
+import com.blackopalsolutions.goneviral.model.request.Request
 import kotlinx.serialization.*
 import java.io.BufferedReader
 import java.io.InputStream
@@ -26,7 +27,7 @@ class ClientCommunicator(private val baseUrl: String) {
     }
 
     @ExperimentalSerializationApi
-    inline fun <reified T> doPost(urlPath: String, requestInfo: Any?,
+    inline fun <reified T> doPost(urlPath: String, requestInfo: Request,
                                   headers: Map<String, String>?): T {
         val strategy = object: RequestStrategy {
             override fun setRequestMethod(conn: HttpURLConnection) {
@@ -36,7 +37,7 @@ class ClientCommunicator(private val baseUrl: String) {
             override fun sendRequest(conn: HttpURLConnection) {
                 conn.setDoOutput(true)
 
-                val entityBody = Json.encodeToString(requestInfo)
+                val entityBody = requestInfo.encodeToJsonString()
                 var os : OutputStream? = null
 
                 try {

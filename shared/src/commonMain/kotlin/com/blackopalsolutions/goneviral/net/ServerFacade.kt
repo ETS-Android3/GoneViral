@@ -2,6 +2,7 @@ package com.blackopalsolutions.goneviral.net
 
 import com.blackopalsolutions.goneviral.model.request.IdRequest
 import com.blackopalsolutions.goneviral.model.request.InsertUsersRequest
+import com.blackopalsolutions.goneviral.model.request.Request
 import com.blackopalsolutions.goneviral.model.request.UpdateUserRequest
 import com.blackopalsolutions.goneviral.model.response.*
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -42,7 +43,7 @@ class ServerFacade {
     fun removeUser(request: IdRequest): Response = post(request, "/removeuser")
 
     @ExperimentalSerializationApi
-    internal inline fun <reified T : Response, reified R> post(request: R, urlPath: String): T {
+    internal inline fun <reified T : Response> post(request: Request, urlPath: String): T {
         return communicator.doPost(urlPath, request, null)
     }
 }

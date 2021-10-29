@@ -1,8 +1,9 @@
 package com.blackopalsolutions.goneviral.net
 
 import com.blackopalsolutions.goneviral.model.request.IdRequest
-import com.blackopalsolutions.goneviral.model.response.GetUserResponse
-import com.blackopalsolutions.goneviral.model.response.Response
+import com.blackopalsolutions.goneviral.model.request.InsertUsersRequest
+import com.blackopalsolutions.goneviral.model.request.UpdateUserRequest
+import com.blackopalsolutions.goneviral.model.response.*
 import kotlinx.serialization.ExperimentalSerializationApi
 
 class ServerFacade {
@@ -10,34 +11,38 @@ class ServerFacade {
 
     @PublishedApi
     internal val communicator = ClientCommunicator(serverUrl)
-/*
-    fun getCard(request: IdRequest): GetCardResponse = return post(request, "/getcard")
 
-    fun getGoal(request: IdRequest): GetGoalResponse = return post(request, "/getgoal")
+    @ExperimentalSerializationApi
+    fun getCard(request: IdRequest): GetCardResponse = post(request, "/getcard")
 
+    @ExperimentalSerializationApi
+    fun getGoal(request: IdRequest): GetGoalResponse = post(request, "/getgoal")
+
+    @ExperimentalSerializationApi
     fun getGoalFromRole(request: IdRequest): GetGoalResponse
-        = return post(request, "/getgoalfromrole")
+        = post(request, "/getgoalfromrole")
 
-    fun getRole(request: IdRequest): GetRoleResponse = return post(request, "/getrole")
+    @ExperimentalSerializationApi
+    fun getRole(request: IdRequest): GetRoleResponse = post(request, "/getrole")
 
+    @ExperimentalSerializationApi
     fun getRoleFromGoal(request: IdRequest): GetRoleResponse
-        = return post(request, "/getrolefromgoal")
-*/
+        = post(request, "/getrolefromgoal")
+
     @ExperimentalSerializationApi
     fun getUser(request: IdRequest): GetUserResponse = post(request, "/getuser")
 
-    /*
-
+    @ExperimentalSerializationApi
     fun insertUsers(request: InsertUsersRequest): Response = post(request, "/insertusers")
 
+    @ExperimentalSerializationApi
     fun updateUser(request: UpdateUserRequest): Response = post(request, "/updateuser")
 
+    @ExperimentalSerializationApi
     fun removeUser(request: IdRequest): Response = post(request, "/removeuser")
-     */
 
     @ExperimentalSerializationApi
-    internal inline fun <reified T: Response, reified R> post(request: R, urlPath: String) : T {
-        val response = communicator.doPost<T>(urlPath, request, null)
-        return response
+    internal inline fun <reified T : Response, reified R> post(request: R, urlPath: String): T {
+        return communicator.doPost(urlPath, request, null)
     }
 }

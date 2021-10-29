@@ -25,29 +25,30 @@ class MainActivity : AppCompatActivity(), ServiceObserver<GetCardResponse> {
         val viewHandBtn = findViewById<Button>(R.id.view_hand_button)
 
         drawCardBtn.setOnClickListener {
-            numOfCardsInHand++;
+            numOfCardsInHand++
             val id = nextInt(1, 35)
-            var req = IdRequest(id)
+            val req = IdRequest(id)
             cardService.getCard(req, this)
-
-
         }
 
         viewHandBtn.setOnClickListener {
-            val intent = Intent(this, ViewHandActivity::class.java);
+            val intent = Intent(this, ViewHandActivity::class.java)
             startActivity(intent)
         }
     }
 
     override fun onSuccess(response: GetCardResponse) {
-        Toast.makeText(this@MainActivity, "You just drew a card!", Toast.LENGTH_LONG).show()
+        val cardTitle = response.card?.title
+        Toast.makeText(this@MainActivity, "You just drew a card! Title: $cardTitle", Toast.LENGTH_LONG).show()
     }
 
     override fun onFailure(response: GetCardResponse) {
-        Toast.makeText(this@MainActivity, "You just failed to draw a card!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, response.message, Toast.LENGTH_LONG).show()
     }
 
     override fun handleException(exception: Exception) {
-        Toast.makeText(this@MainActivity, "You just drew an exception!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, exception.stackTrace.joinToString(), Toast.LENGTH_LONG).show()
+        println("**************************************************")
+        println(exception.stackTrace.joinToString())
     }
 }

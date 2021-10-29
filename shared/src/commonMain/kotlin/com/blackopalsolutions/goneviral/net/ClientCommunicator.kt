@@ -5,6 +5,7 @@ import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.IOException
+import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlinx.serialization.json.Json
@@ -36,12 +37,18 @@ class ClientCommunicator(private val baseUrl: String) {
                 conn.setDoOutput(true)
 
                 val entityBody = Json.encodeToString(requestInfo)
+                var os : OutputStream? = null
 
                 try {
-                    val os = conn.getOutputStream()
+                    os = conn.getOutputStream()
                     os.write(entityBody.encodeToByteArray())
                     os.flush()
                 } catch (ignored: IOException) {}
+                finally {
+                    if (os != null) {
+                        os.close()
+                    }
+                }
             }
         }
 

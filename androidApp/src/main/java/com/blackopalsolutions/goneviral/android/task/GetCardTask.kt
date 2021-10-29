@@ -28,7 +28,7 @@ class GetCardTask(val id: Int, handler: MessageHandler) : BackgroundTask(handler
         } catch (e: RequestException) {
             sendExceptionMessage(e)
         } catch (e: RuntimeException) {
-            e.message?.let { sendFailedMessage(it) }
+            sendExceptionMessage(e)
         }
     }
 

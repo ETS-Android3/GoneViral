@@ -15,7 +15,40 @@ import kotlin.random.Random.Default.nextInt
 class MainActivity : AppCompatActivity(), ServiceObserver<GetCardResponse> {
 
     private var cardsInHand: MutableList<String> = ArrayList()
-    var cardDeck = listOf("back_to_school", "baking", "caligraphy", "cat_bath", "ic_dance_party_for_one")
+    var cardDeck = listOf(
+        "back_to_school",
+        "baking",
+        "caligraphy",
+        "cat_bath",
+        "dance_party_for_one",
+        "drive_thru",
+        "edified",
+        "eternal_youth",
+        "fatal_kiss",
+        "food_storage",
+        "fresh_air",
+        "gardening",
+        "grocery_store",
+        "message_of_encouragement",
+        "misinformation",
+        "new_game",
+        "new_hobby",
+        "online_dating",
+        "online_gaming",
+        "panic_buy",
+        "prom_2020",
+        "sewing",
+        "singing_in_the_rain",
+        "skateboarding",
+        "spider",
+        "tailgating",
+        "thicc",
+        "to_the_park",
+        "tree_trimming",
+        "tricks",
+        "video_call",
+        "virtual_hug"
+    )
 
     var cardService = CardService()
 

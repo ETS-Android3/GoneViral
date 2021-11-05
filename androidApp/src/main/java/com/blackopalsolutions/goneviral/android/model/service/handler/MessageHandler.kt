@@ -5,7 +5,7 @@ import android.os.Looper
 import android.os.Message
 import java.lang.Exception
 
-abstract class MessageHandler : Handler(Looper.getMainLooper()) {
+abstract class MessageHandler(looper: Looper) : Handler(looper) {
 
     override fun handleMessage(msg: Message) {
         handleBeforeMessage()

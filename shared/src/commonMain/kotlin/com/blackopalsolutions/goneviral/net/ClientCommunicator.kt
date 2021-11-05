@@ -1,10 +1,12 @@
 package com.blackopalsolutions.goneviral.net
 
+import com.blackopalsolutions.goneviral.model.request.Request
 import kotlinx.serialization.*
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.IOException
+import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlinx.serialization.json.Json
@@ -25,7 +27,7 @@ class ClientCommunicator(private val baseUrl: String) {
     }
 
     @ExperimentalSerializationApi
-    inline fun <reified T> doPost(urlPath: String, requestInfo: Any?,
+    inline fun <reified T> doPost(urlPath: String, requestInfo: Request,
                                   headers: Map<String, String>?): T {
         val strategy = object: RequestStrategy {
             override fun setRequestMethod(conn: HttpURLConnection) {
@@ -35,13 +37,19 @@ class ClientCommunicator(private val baseUrl: String) {
             override fun sendRequest(conn: HttpURLConnection) {
                 conn.setDoOutput(true)
 
-                val entityBody = Json.encodeToString(requestInfo)
+                val entityBody = requestInfo.encodeToJsonString()
+                var os : DataOutputStream? = null
 
                 try {
-                    val os = conn.getOutputStream()
-                    os.write(entityBody.encodeToByteArray())
+                    os = DataOutputStream(conn.getOutputStream())
+                    os.writeBytes(entityBody)
                     os.flush()
                 } catch (ignored: IOException) {}
+                finally {
+                    if (os != null) {
+                        os.close()
+                    }
+                }
             }
         }
 

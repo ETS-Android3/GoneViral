@@ -1,5 +1,6 @@
 package com.blackopalsolutions.goneviral.android.model.service
 
+import android.os.Looper
 import com.blackopalsolutions.goneviral.android.model.service.handler.UserMessageHandler
 import com.blackopalsolutions.goneviral.android.task.GetUserTask
 import com.blackopalsolutions.goneviral.model.domain.User
@@ -11,16 +12,17 @@ import java.lang.Exception
 class UserService {
     fun getUser(request: IdRequest, observer: ServiceObserver<GetUserResponse>) {
         GlobalScope.launch {
+            Looper.prepare()
             val task = getUserTask(request, observer)
             task.run()
         }
     }
 
     private fun getUserTask(request: IdRequest, observer: ServiceObserver<GetUserResponse>): GetUserTask {
-        return GetUserTask(request.id, GetUserMessageHandler(observer))
+        return GetUserTask(request.id, GetUserMessageHandler(observer, Looper.getMainLooper()))
     }
 
-    class GetUserMessageHandler(private val observer: ServiceObserver<GetUserResponse>): UserMessageHandler() {
+    class GetUserMessageHandler(private val observer: ServiceObserver<GetUserResponse>, looper: Looper): UserMessageHandler(looper) {
         override fun handleSuccessMessage(user: User) {
             observer.onSuccess(GetUserResponse(user))
         }

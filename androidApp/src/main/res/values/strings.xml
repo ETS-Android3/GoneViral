@@ -2,4 +2,9 @@
 <resources>
     <string name="view_hand_button_label">View Hand</string>
     <string name="draw_card_button_label">Draw Card</string>
+    <string name="app_name">Gone Viral</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account</string>
 </resources>

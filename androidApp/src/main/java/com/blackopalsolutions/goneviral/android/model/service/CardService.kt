@@ -5,13 +5,14 @@ import com.blackopalsolutions.goneviral.android.model.service.handler.CardMessag
 import com.blackopalsolutions.goneviral.android.task.GetCardTask
 import com.blackopalsolutions.goneviral.model.domain.Card
 import com.blackopalsolutions.goneviral.model.request.IdRequest
+import com.blackopalsolutions.goneviral.model.request.StringRequest
 import com.blackopalsolutions.goneviral.model.response.GetCardResponse
 import kotlinx.coroutines.*
 import java.lang.Exception
 
 class CardService {
 
-    fun getCard(request: IdRequest, observer: ServiceObserver<GetCardResponse>) {
+    fun getCard(request: StringRequest, observer: ServiceObserver<GetCardResponse>) {
         GlobalScope.launch {
             Looper.prepare()
             val task = getCardTask(request, observer)
@@ -19,8 +20,8 @@ class CardService {
         }
     }
 
-    private fun getCardTask(request: IdRequest, observer: ServiceObserver<GetCardResponse>): GetCardTask {
-        return GetCardTask(request.id, GetCardMessageHandler(observer, Looper.getMainLooper()))
+    private fun getCardTask(request: StringRequest, observer: ServiceObserver<GetCardResponse>): GetCardTask {
+        return GetCardTask(request.value, GetCardMessageHandler(observer, Looper.getMainLooper()))
     }
 
     class GetCardMessageHandler(private val observer: ServiceObserver<GetCardResponse>, looper: Looper): CardMessageHandler(looper) {

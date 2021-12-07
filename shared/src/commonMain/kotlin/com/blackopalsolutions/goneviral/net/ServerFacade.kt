@@ -1,6 +1,7 @@
 package com.blackopalsolutions.goneviral.net
 
 import com.blackopalsolutions.goneviral.model.request.IdRequest
+import com.blackopalsolutions.goneviral.model.request.StringRequest
 import com.blackopalsolutions.goneviral.model.request.InsertUsersRequest
 import com.blackopalsolutions.goneviral.model.request.Request
 import com.blackopalsolutions.goneviral.model.request.UpdateUserRequest
@@ -14,7 +15,7 @@ class ServerFacade {
     internal val communicator = ClientCommunicator(serverUrl)
 
     @ExperimentalSerializationApi
-    fun getCard(request: IdRequest): GetCardResponse = post(request, "/getcard")
+    fun getCard(request: StringRequest): GetCardResponse = post(request, "/getcard")
 
     @ExperimentalSerializationApi
     fun getGoal(request: IdRequest): GetGoalResponse = post(request, "/getgoal")

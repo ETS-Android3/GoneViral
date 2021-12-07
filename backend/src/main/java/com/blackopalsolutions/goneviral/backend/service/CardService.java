@@ -2,8 +2,9 @@ package com.blackopalsolutions.goneviral.backend.service;
 
 import com.blackopalsolutions.goneviral.backend.dao.CardDao;
 import com.blackopalsolutions.goneviral.backend.dao.DatabaseAccessException;
+import com.blackopalsolutions.goneviral.backend.dao.ServerException;
 import com.blackopalsolutions.goneviral.model.domain.Card;
-import com.blackopalsolutions.goneviral.model.request.IdRequest;
+import com.blackopalsolutions.goneviral.model.request.StringRequest;
 import com.blackopalsolutions.goneviral.model.request.PageRequest;
 import com.blackopalsolutions.goneviral.model.response.GetCardResponse;
 import com.blackopalsolutions.goneviral.model.response.GetCardsResponse;
@@ -22,11 +23,11 @@ public class CardService {
      * @param request the request to retrieve the card.
      * @return the card retrieved, or a failure message.
      */
-    public GetCardResponse getCard(IdRequest request) {
+    public GetCardResponse getCard(StringRequest request) {
         try {
-            Card card = dao.getCard(request.getId());
+            Card card = dao.getCard(request.getValue());
             return new GetCardResponse(card);
-        } catch (DatabaseAccessException e) {
+        } catch (DatabaseAccessException | ServerException e) {
             return new GetCardResponse(e.getMessage());
         }
     }

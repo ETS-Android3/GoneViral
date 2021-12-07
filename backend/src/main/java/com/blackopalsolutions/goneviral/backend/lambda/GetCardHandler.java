@@ -2,11 +2,11 @@ package com.blackopalsolutions.goneviral.backend.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.blackopalsolutions.goneviral.model.request.IdRequest;
+import com.blackopalsolutions.goneviral.model.request.StringRequest;
 import com.blackopalsolutions.goneviral.model.response.GetCardResponse;
 import com.blackopalsolutions.goneviral.backend.service.CardService;
 
-public class GetCardHandler implements RequestHandler<IdRequest, GetCardResponse> {
+public class GetCardHandler implements RequestHandler<StringRequest, GetCardResponse> {
 
     /**
      * Handles a getCard request.
@@ -15,7 +15,7 @@ public class GetCardHandler implements RequestHandler<IdRequest, GetCardResponse
      * @return the card retrieved, or a failure message.
      */
     @Override
-    public GetCardResponse handleRequest(IdRequest request, Context context) {
+    public GetCardResponse handleRequest(StringRequest request, Context context) {
         return (new CardService()).getCard(request);
     }
 }

@@ -6,15 +6,15 @@ import com.blackopalsolutions.goneviral.android.model.service.handler.MessageHan
 import com.blackopalsolutions.goneviral.android.util.JsonUtility
 import com.blackopalsolutions.goneviral.model.domain.Card
 import com.blackopalsolutions.goneviral.model.domain.User
-import com.blackopalsolutions.goneviral.model.request.IdRequest
+import com.blackopalsolutions.goneviral.model.request.StringRequest
 import com.blackopalsolutions.goneviral.net.RequestException
 import java.io.IOException
 import java.lang.RuntimeException
 
-class GetCardTask(val id: Int, handler: MessageHandler) : BackgroundTask(handler) {
+class GetCardTask(val title: String, handler: MessageHandler) : BackgroundTask(handler) {
 
     override fun doTask() {
-        val request = IdRequest(id)
+        val request = StringRequest(title)
         try {
             val response = getServerFacade().getCard(request)
             val card = response.card

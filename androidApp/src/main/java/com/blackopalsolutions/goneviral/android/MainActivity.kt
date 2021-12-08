@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity(), ServiceObserver<GetCardResponse> {
 
         drawCardBtn.setOnClickListener {
             cardsInHand.add(cardDeck[cardsInHand.size])
-            val title = "Shortage"
-            val req = StringRequest(title)
-            cardService.getCard(req, this)
+            //val title = "Shortage"
+            //val req = StringRequest(title)
+            //cardService.getCard(req, this)
         }
 
         viewHandBtn.setOnClickListener {

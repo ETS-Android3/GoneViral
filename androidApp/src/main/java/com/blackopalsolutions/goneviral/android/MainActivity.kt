@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.blackopalsolutions.goneviral.android.model.service.CardService
 import com.blackopalsolutions.goneviral.android.model.service.ServiceObserver
-import com.blackopalsolutions.goneviral.model.request.IdRequest
+import com.blackopalsolutions.goneviral.model.request.StringRequest
 import com.blackopalsolutions.goneviral.model.response.GetCardResponse
 import java.util.*
 import kotlin.random.Random.Default.nextInt
@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity(), ServiceObserver<GetCardResponse> {
 
         drawCardBtn.setOnClickListener {
             cardsInHand.add(cardDeck[cardsInHand.size])
-            val id = nextInt(1, 35)
-            val req = IdRequest(id)
-//            cardService.getCard(req, this)
+            val title = "Shortage"
+            val req = StringRequest(title)
+            cardService.getCard(req, this)
         }
 
         viewHandBtn.setOnClickListener {

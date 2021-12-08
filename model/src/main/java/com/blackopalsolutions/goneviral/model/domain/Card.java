@@ -1,53 +1,47 @@
 package com.blackopalsolutions.goneviral.model.domain;
 
 public class Card {
-    private int cardId;
+    private String title;
     private String type;
-    private int cost;
+    private String backTexture;
     private String description;
     private String effect;
-    private String title;
-    private int value;
-    private String backTexture;
     private String frontTexture;
+    private String playTime;
 
     public Card() {}
 
     /**
      * Creates a card model.
-     * @param cardId the id of the card.
+     * @param title the title of the card.
      * @param type the card type (i.e. Action, Conspiracy, etc.).
-     * @param cost the card's cost.
+     * @param backTexture the filename for the texture on the back of the card.
      * @param description the card's description.
      * @param effect the card's effect.
-     * @param title the title of the card.
-     * @param value the value of the card.
-     * @param backTexture the filename for the texture on the back of the card.
      * @param frontTexture the filename for the texture on the front of the card.
+     * @param playTime when the card should be played
      */
-    public Card(int cardId, String type, int cost, String description, String effect,
-                String title, int value, String backTexture, String frontTexture) {
-        this.cardId = cardId;
+    public Card(String title, String type, String backTexture, String description, String effect,
+                String frontTexture, String playTime) {
+        this.title = title;
         this.type = type;
-        this.cost = cost;
+        this.backTexture = backTexture;
         this.description = description;
         this.effect = effect;
-        this.title = title;
-        this.value = value;
-        this.backTexture = backTexture;
         this.frontTexture = frontTexture;
+        this.playTime = playTime;
     }
 
-    public int getCardId() {
-        return cardId;
+    public String getTitle() {
+        return title;
     }
 
     public String getType() {
         return type;
     }
 
-    public int getCost() {
-        return cost;
+    public String getBackTexture() {
+        return backTexture;
     }
 
     public String getDescription() {
@@ -58,32 +52,24 @@ public class Card {
         return effect;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public String getBackTexture() {
-        return backTexture;
-    }
-
     public String getFrontTexture() {
         return frontTexture;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public String getPlayTime() {
+        return playTime;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setBackTexture(String backTexture) {
+        this.backTexture = backTexture;
     }
 
     public void setDescription(String description) {
@@ -94,19 +80,11 @@ public class Card {
         this.effect = effect;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public void setBackTexture(String backTexture) {
-        this.backTexture = backTexture;
-    }
-
     public void setFrontTexture(String frontTexture) {
         this.frontTexture = frontTexture;
+    }
+
+    public void setPlayTime(String playTime) {
+        this.playTime = playTime;
     }
 }

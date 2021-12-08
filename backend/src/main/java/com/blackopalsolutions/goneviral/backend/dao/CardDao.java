@@ -27,6 +27,7 @@ public class CardDao extends Dao {
     private static final String valueAttr = "value";
     private static final String backTextureAttr = "back_texture";
     private static final String frontTextureAttr = "front_texture";
+    private static final String playTimeAttr = "play_time";
 
     /**
      * Retrieves a card from the database.
@@ -51,15 +52,13 @@ public class CardDao extends Dao {
         }
 
         String type = outcome.getString(typeAttr);
-        int cost = outcome.getInt(costAttr);
+        String backTexture = outcome.getString(backTextureAttr);
         String description = outcome.getString(descriptionAttr);
         String effect = outcome.getString(effectAttr);
-        int value = outcome.getInt(valueAttr);
-        String backTexture = outcome.getString(backTextureAttr);
         String frontTexture = outcome.getString(frontTextureAttr);
+        String playTime = outcome.getString(playTimeAttr);
 
-        // TODO: remove ID
-        return new Card(0, type, cost, description, effect, title, value, backTexture, frontTexture);
+        return new Card(title, type, backTexture, description, effect,  frontTexture, playTime);
      }
 
     /**
@@ -153,6 +152,7 @@ public class CardDao extends Dao {
         int value = rs.getInt("value");
         String back = rs.getString("back_texture");
         String front = rs.getString("front_texture");
-        return new Card(cardId, type, cost, description, effect, title, value, back, front);
+//        return new Card(cardId, type, cost, description, effect, title, value, back, front);
+        return null;
     }
 }
